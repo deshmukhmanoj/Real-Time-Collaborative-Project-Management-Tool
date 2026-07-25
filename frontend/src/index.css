@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-ink: #12192B;
+  --color-ink-soft: #4A5568;
+  --color-ink-faint: #8A93A6;
+
+  --color-blueprint: #2B5F8A;
+  --color-blueprint-deep: #1B3A56;
+  --color-blueprint-light: #E4EDF4;
+
+  --color-paper: #F1F2ED;
+  --color-paper-dark: #E7E8E0;
+
+  --color-line: #D7D9CE;
+
+  --color-amber: #DB9A3C;
+  --color-amber-light: #FBEEDA;
+
+  --color-coral: #C6503F;
+  --color-coral-light: #F8E4E0;
+
+  --color-moss: #5C8A62;
+  --color-moss-light: #E5EEE3;
+
+  /* Fonts */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(18,25,43,.06),0 1px 1px rgba(18,25,43,.04);
+  --shadow-card-hover: 0 4px 12px rgba(18,25,43,.10),0 2px 4px rgba(18,25,43,.06);
+  --shadow-panel: 0 8px 30px rgba(18,25,43,.12);
+
+  /* Animations — Tailwind v4 auto-generates animate-* utilities from these,
+     matched against the @keyframes below by name */
+  --animate-fade-in: fade-in 0.15s ease-out;
+  --animate-scale-in: scale-in 0.16s ease-out;
+  --animate-slide-up: slide-up 0.18s ease-out;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes scale-in {
+  0% { opacity: 0; transform: scale(0.97) translateY(4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans;
+    background-image:
+      linear-gradient(to right, rgba(18, 25, 43, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(18, 25, 43, 0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+  }
+
+  /* Visible keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid #2B5F8A;
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(18, 25, 43, 0.18);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(18, 25, 43, 0.3);
+  }
+}
+
+@layer utilities {
+  /* Small die-cut "tab" perforation under list headers — the signature motif */
+  .tab-perforation {
+    background-image: repeating-linear-gradient(
+      to right,
+      #C9CCBE 0,
+      #C9CCBE 5px,
+      transparent 5px,
+      transparent 10px
+    );
+    height: 1px;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+}
+
+@layer components {
+  /* Shared "title + actions" header pattern used on Dashboard/Workspace pages —
+     stacks vertically on small screens, sits side-by-side from sm: up.
+     Defined once here so every page using it stays in sync automatically. */
+  .page-header-row {
+    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  /* Top-level page heading (Dashboard "Workspaces", Workspace name, etc.) */
+  .page-title {
+    @apply font-display text-xl font-semibold sm:text-2xl;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
