@@ -10,9 +10,26 @@ const app: Application = express();
 
 // Security & parsing middleware
 app.use(helmet());
+const allowedOrigins = [
+  'http://localhost:5173', // npm run dev
+  'http://localhost:4173', // npm run preview
+  'https://deshmukhmanoj.github.io', // GitHub Pages
+];
+
 app.use(
   cors({
-    origin: env.CLIENT_URL,
+    origin: (origin, callback) => {
+      // Allow requests without Origin header (Postman, server-to-server, etc.)
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
   })
 );

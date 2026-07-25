@@ -15,7 +15,11 @@ let io: Server;
 export function initSocket(httpServer: HttpServer): Server {
   io = new Server(httpServer, {
     cors: {
-      origin: env.CLIENT_URL,
+      origin: [
+        'http://localhost:5173',
+        'http://localhost:4173',
+        'https://deshmukhmanoj.github.io',
+      ],
       credentials: true,
     },
   });
