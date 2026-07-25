@@ -5,6 +5,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [tailwindcss(), react()],
+  base:"/Real-Time-Collaborative-Project-Management-Tool/",
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
