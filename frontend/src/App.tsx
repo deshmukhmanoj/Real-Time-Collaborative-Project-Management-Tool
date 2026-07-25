@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Real-Time-Collaborative-Project-Management-Tool">
       <SocketProvider>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
